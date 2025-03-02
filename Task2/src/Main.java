@@ -33,6 +33,8 @@ public class Main {
 
     public static List<String> getPersonInfo(List<Person> people, PersonToString converter) {
         List<String> result = new ArrayList<>();
+        if (people==null) return result;
+
         for (Person person : people) {
             result.add(converter.personToString(person));
         }
