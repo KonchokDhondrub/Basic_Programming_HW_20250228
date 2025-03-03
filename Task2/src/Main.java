@@ -1,5 +1,4 @@
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 @FunctionalInterface
 interface PersonToString {
@@ -18,24 +17,17 @@ public class Main {
         people.add(person1);
         people.add(person2);
 
-        List<String> fullNames = getPersonInfo(people, p -> p.fName + " " + p.lName);
-        System.out.println("Full Names: " + fullNames);
-
-        List<String> emails = getPersonInfo(people, p -> p.email);
-        System.out.println("Emails: " + emails);
-
-        List<String> phones = getPersonInfo(people, p -> p.phone);
-        System.out.println("Phones: " + phones);
-
-        List<String> addresses = getPersonInfo(people, p -> p.address.toString());
-        System.out.println("Addresses: " + addresses);
+        System.out.println("Full Names: " + getPersonInfo(people, p -> p.getfName() + " " + p.getlName()));
+        System.out.println("Emails: " + getPersonInfo(people, p -> p.getEmail()));
+        System.out.println("Phones: " + getPersonInfo(people, p -> p.getPhone()));
+        System.out.println("Addresses: " + getPersonInfo(people, p -> p.getAddress().toString()));
     }
 
-    public static List<String> getPersonInfo(List<Person> people, PersonToString converter) {
-        List<String> result = new ArrayList<>();
+    public static <E extends Person> Set<String> getPersonInfo(List<E> people, PersonToString converter) {
+        Set<String> result = new HashSet<>();
         if (people==null) return result;
 
-        for (Person person : people) {
+        for (E person : people) {
             result.add(converter.personToString(person));
         }
         return result;

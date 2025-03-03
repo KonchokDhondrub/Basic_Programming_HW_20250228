@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -30,9 +31,9 @@ public class Main {
         }
     }
 
-    public static List<Cars> sort(List<Cars> list, Comparator<Cars> comparator) {
+    public static <E> List<E> sort(Collection<E> list, Comparator<E> comparator) {
         if (list == null || list.isEmpty() || comparator == null) return new ArrayList<>();
-        List<Cars> result = new ArrayList<>(list);
+        List<E> result = new ArrayList<>(list);
         result.sort(comparator);
         return result;
     }
